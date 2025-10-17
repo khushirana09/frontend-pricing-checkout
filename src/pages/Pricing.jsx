@@ -21,26 +21,26 @@ export default function Pricing() {
     : selectedPlan.price.toFixed(2);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6">
-      <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center text-gray-800">
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center p-6 md:p-10">
+      <h1 className="text-2xl md:text-3xl font-bold mb-12 text-center text-white">
         Choose Your Plan
       </h1>
 
       {/* Plans */}
-      <div className="flex flex-wrap justify-center gap-6 mb-8">
+      <div className="flex flex-wrap justify-center gap-8 mb-10 w-full max-w-6xl">
         {plans.map((plan) => (
           <div
             key={plan.name}
-            className={`w-72 p-6 rounded-2xl shadow-md transition-transform transform hover:scale-105 cursor-pointer
+            className={`w-72 p-6 rounded-2xl shadow-lg transition-transform transform hover:scale-105 cursor-pointer
               ${selectedPlan.name === plan.name
-                ? "border-4 border-blue-500 bg-blue-50"
-                : "border border-gray-200 bg-white"
+                ? "border-4 border-blue-500 bg-gradient-to-b from-blue-700 to-blue-500 text-white"
+                : "border border-gray-700 bg-gray-800 text-gray-200"
               }`}
             onClick={() => setSelectedPlan(plan)}
           >
-            <h2 className="text-2xl font-semibold mb-4 text-gray-900">{plan.name}</h2>
-            <p className="text-gray-600 mb-4 font-medium">Price: ${plan.price} / year</p>
-            <ul className="mb-4 list-disc list-inside text-gray-700">
+            <h2 className="text-2xl font-semibold mb-4">{plan.name}</h2>
+            <p className="text-lg mb-4 font-medium">Price: ${plan.price} / year</p>
+            <ul className="mb-4 list-disc list-inside space-y-1">
               {plan.features.map((f, i) => <li key={i}>{f}</li>)}
             </ul>
           </div>
@@ -48,15 +48,15 @@ export default function Pricing() {
       </div>
 
       {/* Duration */}
-      <div className="mb-6 flex flex-wrap justify-center gap-3">
-        <span className="mr-2 font-semibold text-gray-700">Duration:</span>
+      <div className="mb-8 flex flex-wrap justify-center gap-4 align-bottom">
+        <span className="mr-2 font-semibold text-gray-300">Duration:</span>
         {durations.map((d) => (
           <button
             key={d}
             className={`px-5 py-2 rounded-full font-medium transition
               ${selectedDuration === d
-                ? "bg-blue-600 text-white shadow-md"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                ? "bg-blue-600 text-white shadow-lg"
+                : "bg-gray-700 text-gray-300 hover:bg-gray-600"
               }`}
             onClick={() => setSelectedDuration(d)}
           >
@@ -66,7 +66,7 @@ export default function Pricing() {
       </div>
 
       {/* Subscription Toggle */}
-      <div className="mb-8 flex items-center justify-center gap-3">
+      <div className="mb-10 flex items-center justify-center gap-4">
         <label className="flex items-center cursor-pointer">
           <div className="relative">
             <input
@@ -75,25 +75,25 @@ export default function Pricing() {
               onChange={() => setIsSubscription(!isSubscription)}
               className="sr-only"
             />
-            <div className={`w-14 h-8 rounded-full transition-all ${isSubscription ? "bg-blue-600" : "bg-gray-300"}`}></div>
+            <div className={`w-14 h-8 rounded-full transition-all ${isSubscription ? "bg-green-600" : "bg-gray-600"}`}></div>
             <div
               className={`absolute top-1 left-1 w-6 h-6 rounded-full bg-white shadow-md transition-all
                 ${isSubscription ? "translate-x-6" : "translate-x-0"}`}
             ></div>
           </div>
-          <span className="ml-3 font-medium text-gray-700">Subscription</span>
+          <span className="ml-3 font-medium text-gray-300">Subscription</span>
         </label>
       </div>
 
       {/* Final Price */}
-      <div className="mb-8 text-2xl md:text-3xl font-bold text-gray-800">
+      <div className="mb-10 text-3xl md:text-4xl font-bold text-white">
         Final Price: ${finalPrice}
       </div>
 
       {/* Proceed Button */}
       <button
         onClick={() => navigate("/checkout", { state: { selectedPlan, selectedDuration, isSubscription, finalPrice } })}
-        className="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-700 shadow-lg transition"
+        className="bg-gradient-to-r from-blue-600 to-blue-400 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-500 shadow-xl transition transform hover:scale-105"
       >
         Proceed to Checkout
       </button>
